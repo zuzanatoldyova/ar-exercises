@@ -10,4 +10,15 @@ class Store < ActiveRecord::Base
       errors.add(:mens_apparel, "has to have womens or mens apparel")
     end
   end
+
+  before_destroy :check_emplyees_count
+
+  private
+
+  def check_emplyees_count
+    if employees.any?
+      return false
+    end
+  end
+
 end
